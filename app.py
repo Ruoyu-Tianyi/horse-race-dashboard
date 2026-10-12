@@ -29,10 +29,10 @@ def hero_art():
 
 def chart_theme(figure, height=360):
     figure.update_layout(
-        height=height, margin=dict(l=0, r=24, t=12, b=20),
+        height=height, margin=dict(l=8, r=30, t=58, b=48),
         paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(75,0,13,0.5)',
         font=dict(family='Segoe UI, sans-serif', color='#ffe9b7', size=12),
-        legend=dict(orientation='h', y=1.14, x=0, font=dict(size=11)),
+        legend=dict(orientation='h', y=1.04, yanchor='bottom', x=0, font=dict(size=11)),
         hoverlabel=dict(bgcolor='#4b0711', font_size=13),
     )
     figure.update_xaxes(gridcolor='rgba(255,212,59,0.19)', zeroline=False, tickfont=dict(family='Race Display, sans-serif', size=21, color='#ffe672'))
@@ -58,7 +58,8 @@ def comparison_chart(field):
     ))
     figure.update_layout(bargap=.25)
     figure.update_xaxes(ticksuffix='%', range=[0, max(field.model_probability.max(), field.market_probability.max()) * 125])
-    return chart_theme(figure, max(340, len(field) * 29 + 60))
+    # Reserve space for every runner plus the legend and axis labels.
+    return chart_theme(figure, max(380, len(field) * 32 + 120))
 
 
 data, history, report = load_data()
@@ -112,7 +113,9 @@ with prediction_tab:
         winner = field.loc[field.won.eq(1)].iloc[0]
         st.success(f"历史冠军：#{int(winner.horse_number)} {winner.horse_name}")
     st.markdown('<div class="section-head">全場勝率對決<span>模型胜率 / 市场定价</span></div>', unsafe_allow_html=True)
-    st.plotly_chart(comparison_chart(field), width='stretch', config={'displayModeBar': False})
+    field_chart = comparison_chart(field)
+    st.plotly_chart(field_chart, width='stretch', height=field_chart.layout.height,
+                    config={'displayModeBar': False, 'scrollZoom': False})
     st.caption('金色柱为模型胜率，粉色菱形为赔率基准；差距是进一步研究的线索。')
     st.markdown('<div id="runner-board" class="section-anchor"></div><div class="section-head">参赛马匹<span>RUNNER INTELLIGENCE</span></div>', unsafe_allow_html=True)
     labels = {'horse_number':'马号','horse_name':'马名','model_probability':'模型胜率','market_probability':'市场概率',
@@ -178,7 +181,8 @@ with validation_tab:
             hovertemplate='%{x}<br>命中率 %{y:.1f}%<br>场数 %{customdata[0]} · 命中 %{customdata[1]}<extra></extra>'))
     figure.update_yaxes(ticksuffix='%', rangemode='tozero')
     st.markdown('<div class="section-head">首选命中率 · 月度变化<span>MONTHLY HIT RATE</span></div>', unsafe_allow_html=True)
-    st.plotly_chart(chart_theme(figure, 330), width='stretch', config={'displayModeBar': False})
+    st.plotly_chart(chart_theme(figure, 380), width='stretch', height=380,
+                    config={'displayModeBar': False, 'scrollZoom': False})
     st.caption('命中率 = 首选马匹实际获胜场数 / 当月可检验场数。前三顺位覆盖冠军 = 模型排序前三包含实际冠军的场次比例。对数损失越低越好，用于检验概率预测。')
     with st.expander('模型、数据与检验口径'):
         st.markdown(f'''- **训练期**：{report['train_period'][0]}—{report['train_period'][1]}，{report['train_races']} 场。

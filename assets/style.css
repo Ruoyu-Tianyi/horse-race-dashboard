@@ -63,7 +63,7 @@ h1{font-size:2.4rem!important;font-weight:950!important;color:#fff0a5!important;
 .stButton button:hover,.stDownloadButton button:hover{border-color:#fff1ad;color:#640b15;background:#ffcf3b;}
 .stButton button:disabled{opacity:.55;}
 [data-testid="stDataFrame"]{border:1px solid #9c5928;border-radius:4px;overflow:hidden;}
-[data-testid="stPlotlyChart"]{border:1px solid #734020;background:#33060dc9;border-radius:4px;padding:8px;}
+[data-testid="stPlotlyChart"]{background:#33060dc9;border-radius:4px;}
 .stCaption{color:#ffe0c2;}
 /* The entire dashboard uses the same illuminated red-and-gold sign system. */
 .side-emblem{background:linear-gradient(135deg,#ffe9a5,#ffc632 60%,#dc830a);color:#a6001c;border:5px double #8f091b;box-shadow:0 0 0 3px #ffd84e,0 0 35px #ffb91988;}
@@ -93,7 +93,8 @@ h1{font-size:2.4rem!important;font-weight:950!important;color:#fff0a5!important;
 .section-head{position:relative;border:2px solid #ffe175;border-left:9px solid #ffe175;background:linear-gradient(100deg,#d91b2d,#7d071e);padding:13px 16px;margin:24px 0 15px;color:#fff0a0;font-size:23px;font-weight:950;letter-spacing:.06em;text-shadow:2px 2px 0 #6a0016;box-shadow:4px 5px 0 #510014,0 0 18px #ffd23322;}
 .section-head:before{content:'◆';color:#ffde57;font-size:14px;margin-right:2px;}
 .section-head span{margin-left:auto;color:#ffdf9e;font-weight:600;font-size:10px;letter-spacing:.08em;text-shadow:none;}
-[data-testid="stPlotlyChart"]{padding:16px 9px 8px;border:5px double #f5c14b;border-radius:0;background:linear-gradient(135deg,#a30e25,#570319);box-shadow:0 6px 0 #4a0013,0 0 20px #ffc22b25;}
+/* Keep chart geometry equal to its allocated height; decoration must not add overflow. */
+[data-testid="stPlotlyChart"]{padding:0;border:0;outline:5px double #f5c14b;outline-offset:-5px;border-radius:0;background:linear-gradient(135deg,#a30e25,#570319);box-shadow:0 6px 0 #4a0013,0 0 20px #ffc22b25;}
 .pick-card{border:3px double #f4ba3c;border-radius:0;padding:0 16px 14px;background:linear-gradient(120deg,#b31831,#720b23);box-shadow:5px 6px 0 #510015;margin-bottom:16px;}
 .pick-card.first{border:3px solid #ffe377;background:linear-gradient(120deg,#ed343d,#b30927 65%,#7f0821);box-shadow:0 0 23px #ffcf4255,5px 6px 0 #510015;}
 .pick-ribbon{display:flex;align-items:center;justify-content:space-between;gap:8px;background:linear-gradient(100deg,#ffdf64,#ed9d1c);color:#7b061a;font-size:13px;font-weight:900;letter-spacing:.12em;padding:5px 9px;margin:0 -16px 14px;}
