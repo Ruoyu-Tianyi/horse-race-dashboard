@@ -107,7 +107,7 @@ def evaluate(frame, probability_column):
     }
 
 
-def build_artifacts():
+def build_artifacts(verbose=True):
     horses, races = load_sources()
     frame = prepare_features(horses, races)
     eligible = frame.loc[frame.eligible].copy()
@@ -165,6 +165,9 @@ def build_artifacts():
     exclusions = horses.finishing_position.value_counts().to_dict()
     metadata = {
         'data_source': 'https://www.kaggle.com/datasets/lantanacamara/hong-kong-horse-racing',
+        'upstream_source_as_credited_by_dataset': 'The Hong Kong Jockey Club (scraped historical results)',
+        'dataset_page_license': 'Unknown',
+        'dataset_page_update_frequency': 'Not specified',
         'source_rows': {'horse': len(horses), 'race': len(races)},
         'source_period': [races.race_date.min().strftime('%Y-%m-%d'), races.race_date.max().strftime('%Y-%m-%d')],
         'train_period': [train.race_date.min().strftime('%Y-%m-%d'), train.race_date.max().strftime('%Y-%m-%d')],
@@ -189,7 +192,8 @@ def build_artifacts():
         ],
     }
     (artifact_dir / 'model_report.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding='utf-8')
-    print(json.dumps({'metrics': models, 'temperature': temperature, 'splits': [metadata['train_races'], metadata['calibration_races'], metadata['test_races']]}, indent=2))
+    if verbose:
+        print(json.dumps({'metrics': models, 'temperature': temperature, 'splits': [metadata['train_races'], metadata['calibration_races'], metadata['test_races']]}, indent=2))
     return test, metadata
 
 

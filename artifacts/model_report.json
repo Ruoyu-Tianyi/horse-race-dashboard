@@ -1,5 +1,8 @@
 {
   "data_source": "https://www.kaggle.com/datasets/lantanacamara/hong-kong-horse-racing",
+  "upstream_source_as_credited_by_dataset": "The Hong Kong Jockey Club (scraped historical results)",
+  "dataset_page_license": "Unknown",
+  "dataset_page_update_frequency": "Not specified",
   "source_rows": {
     "horse": 30189,
     "race": 2367

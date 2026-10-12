@@ -24,7 +24,7 @@ markdown('''## Context & Methods
 
 **Decision:** compare the independent historical-form estimate with market pricing, inspect prior runs, and put plausible candidates on a research watchlist.
 
-**Source:** [Kaggle — Hong Kong Horse Racing Results 2014–17 Seasons](https://www.kaggle.com/datasets/lantanacamara/hong-kong-horse-racing). These supplied CSVs match that dataset's filenames and sample records. The page is partly inaccessible to automated reading; exact upstream scraping history and reuse licence still require checking. The period and counts below are established from the actual supplied files, rather than an older page description.
+**Source:** [Kaggle — Hong Kong Horse Racing Results 2014–17 Seasons](https://www.kaggle.com/datasets/lantanacamara/hong-kong-horse-racing). The dataset page credits data scraped from **The Hong Kong Jockey Club** and lists its licence as **Unknown**, with update frequency **Not specified**. The supplied CSVs match its filenames, size and sample records. Period and counts below come from the actual files, rather than the page's older 2014–16/1,561-race description. The upstream collection has not been independently audited.
 
 ### Key Assumptions
 - The CSVs contain historical race observations, not a synthetic dataset. No independent audit of the upstream collection was available.
@@ -67,7 +67,7 @@ markdown('### Position codes and market relationship'),
 code('''display(horses.finishing_position.value_counts().rename_axis('Result code').to_frame('Rows').tail(22))
 features = prepare_features(horses, races)
 eligible = features.loc[features.eligible].copy()
-eligible['odds_band'] = pd.cut(eligible.win_odds, [0,3,6,12,25,100], labels=['<3','3–6','6–12','12–25','25+'])
+eligible['odds_band'] = pd.cut(eligible.win_odds, [0,3,6,12,25,100], labels=['≤3','(3, 6]','(6, 12]','(12, 25]','>25'])
 odds_groups = eligible.groupby('odds_band', observed=True).agg(starts=('won','size'), wins=('won','sum'))
 odds_groups['win_rate'] = odds_groups.wins / odds_groups.starts
 fig, ax = plt.subplots(figsize=(8,4))
@@ -78,7 +78,7 @@ display(odds_groups)
 print('Eligible races:', eligible.race_id.nunique(), '| Excluded races:', races.race_id.nunique() - eligible.race_id.nunique())'''),
 markdown('Historical prices provide a meaningful baseline, but their recording time is unknown. This descriptive relationship does not prove that a tradable betting advantage existed.'),
 markdown('## Results\n### Reproduce the model and inspect held-out performance\nThe next cell rebuilds all committed artifacts deterministically; it uses no current-race finish information or odds as features.'),
-code('''test, model_report = build_artifacts()
+code('''test, model_report = build_artifacts(verbose=False)
 display(pd.DataFrame(model_report['metrics']).T.round(4))
 assert abs(test.groupby('race_id').model_probability.sum() - 1).max() < 1e-8
 assert abs(test.groupby('race_id').market_probability.sum() - 1).max() < 1e-8
@@ -99,7 +99,7 @@ markdown(f'''## Takeaways
 2. Use three headline values: top-pick model win probability, recorded historical odds, and the model–market probability gap. Show the field comparison before runner detail.
 3. Exclude raw finish-time rankings and profit/ROI panels: distances differ, and reliable executable odds/dividends/fees are unavailable. Exclude raw incident narratives from the main view because they overwhelm the repeated comparison task.
 4. A production implementation would refresh historical features after official result confirmation, refresh pre-race odds every 60 seconds if a licensed feed permits, and suspend stale price comparisons after 120 seconds. These are design assumptions; this snapshot does not update.
-5. No unseen race has been predicted here: this is an out-of-time historical replay and a course prototype. Upstream data provenance/licence, live integrations and an independent future evaluation remain open production questions.'''),
+5. No currently upcoming race has been predicted here: this is an out-of-time historical replay and a course prototype. Upstream data provenance/licence, live integrations and an independent future evaluation remain open production questions.'''),
 ]
 notebook = nbf.v4.new_notebook(cells=cells, metadata={'kernelspec':{'display_name':'RACE EDGE (Python 3.14)','language':'python','name':'race-edge'}, 'language_info':{'name':'python','version':'3.14'}})
 notebook_path = root / 'notebooks/01_eda_and_validation.ipynb'

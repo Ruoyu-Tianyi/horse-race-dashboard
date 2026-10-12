@@ -12,7 +12,7 @@ The app compares an independent historical-form model with recorded market price
 
 **Dataset:** [Hong Kong Horse Racing Results 2014–17 Seasons, Lantana Camara, Kaggle](https://www.kaggle.com/datasets/lantanacamara/hong-kong-horse-racing).
 
-The supplied files contain historical race observations rather than a teaching or synthetic dataset. They match the Kaggle dataset's filenames and sample records. The Kaggle page's older indexed description mentions 2014–16 and 1,561 races; the actual supplied snapshot extends to **2017-07-16** and is the controlling source for this project's coverage. The complete upstream scraping process and reuse licence were not independently verified and should be checked on the dataset page before any wider commercial reuse. Source hashes are in `artifacts/model_report.json`.
+The dataset page credits data scraped from **The Hong Kong Jockey Club (HKJC)**; these are real historical race observations rather than a teaching or synthetic dataset. The supplied files match its filenames, size and sample records. The page's older description mentions 2014–16 and 1,561 races, while its latest title covers 2014–17; the actual supplied snapshot extends to **2017-07-16** and is the controlling source for this project's coverage. The page lists its licence as **Unknown** and its update frequency as **Not specified**. The collection process has not been independently audited. Source hashes are in `artifacts/model_report.json`.
 
 | File | Grain | Rows | Columns |
 |---|---|---:|---:|
