@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="800" viewBox="0 0 1100 800">
+<rect width="1100" height="800" fill="#0b0f0e"/><g font-family="Arial" fill="#edf3e9">
+<rect x="20" y="20" width="200" height="760" fill="#151c18" rx="12"/><text x="40" y="65" font-size="25">RACE EDGE</text><text x="40" y="125">Course / Date / Race</text><text x="40" y="160">Useful filters only</text>
+<text x="250" y="65" font-size="26">Team title + decision caption</text><text x="250" y="105">Historical period + intended production refresh</text>
+<g fill="#151c18" stroke="#42503e"><rect x="250" y="150" width="250" height="100" rx="8"/><rect x="525" y="150" width="250" height="100" rx="8"/><rect x="800" y="150" width="270" height="100" rx="8"/><rect x="250" y="280" width="550" height="260" rx="8"/><rect x="820" y="280" width="250" height="260" rx="8"/><rect x="250" y="570" width="820" height="160" rx="8"/></g>
+<text x="270" y="195">1. Top-pick win probability</text><text x="545" y="195">2. Historical win odds</text><text x="820" y="195">3. Model–market gap</text><text x="270" y="330">One chart: model vs market</text><text x="840" y="330">Shortlist / context</text><text x="270" y="620">Runner details / result reveal</text><text x="250" y="770">Secondary tab: out-of-time validation, one trend chart</text></g></svg>

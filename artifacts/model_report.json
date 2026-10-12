@@ -1,0 +1,274 @@
+{
+  "data_source": "https://www.kaggle.com/datasets/lantanacamara/hong-kong-horse-racing",
+  "source_rows": {
+    "horse": 30189,
+    "race": 2367
+  },
+  "source_period": [
+    "2014-09-14",
+    "2017-07-16"
+  ],
+  "train_period": [
+    "2014-09-14",
+    "2016-07-10"
+  ],
+  "calibration_period": [
+    "2016-09-03",
+    "2016-12-27"
+  ],
+  "test_period": [
+    "2017-01-01",
+    "2017-07-16"
+  ],
+  "train_races": 1557,
+  "calibration_races": 295,
+  "test_races": 509,
+  "temperature": 1.025,
+  "eligible_races": 2361,
+  "excluded_races": 6,
+  "eligible_starts": 29515,
+  "position_codes": {
+    "1": 2361,
+    "2": 2354,
+    "3": 2350,
+    "6": 2346,
+    "5": 2341,
+    "4": 2340,
+    "7": 2339,
+    "8": 2329,
+    "9": 2305,
+    "10": 2260,
+    "11": 2186,
+    "12": 2020,
+    "13": 995,
+    "14": 838,
+    "WV": 461,
+    "WV-A": 102,
+    "4 DH": 35,
+    "PU": 29,
+    "UR": 26,
+    "3 DH": 20,
+    "5 DH": 18,
+    "WX": 16,
+    "2 DH": 14,
+    "6 DH": 14,
+    "1 DH": 12,
+    "8 DH": 12,
+    "FE": 10,
+    "WX-A": 10,
+    "9 DH": 8,
+    "10 DH": 8,
+    "7 DH": 8,
+    "DNF": 7,
+    "TNP": 6,
+    "11 DH": 4,
+    "12 DH": 2,
+    "NA": 2,
+    "DISQ": 1
+  },
+  "features": [
+    "draw_fraction",
+    "actual_weight",
+    "relative_weight",
+    "declared_horse_weight",
+    "race_distance",
+    "field_size",
+    "horse_prior_starts",
+    "horse_prior_win_rate",
+    "horse_prior_top3_rate",
+    "recent_form",
+    "last_form",
+    "days_since_last",
+    "trainer_prior_win_rate",
+    "jockey_prior_win_rate",
+    "course_distance_rate",
+    "weight_change",
+    "distance_change",
+    "race_course",
+    "race_class",
+    "track_condition",
+    "surface"
+  ],
+  "metrics": {
+    "Form model": {
+      "races": 509,
+      "top1_hits": 128,
+      "top1_accuracy": 0.25147347740667975,
+      "top3_coverage": 0.550098231827112,
+      "log_loss": 2.2020782778545382,
+      "brier": 0.069340288440714
+    },
+    "Closing market": {
+      "races": 509,
+      "top1_hits": 148,
+      "top1_accuracy": 0.2907662082514735,
+      "top3_coverage": 0.6326129666011788,
+      "log_loss": 1.9910246887330285,
+      "brier": 0.0658620908029369
+    },
+    "Uniform": {
+      "races": 509,
+      "top1_hits": 44,
+      "top1_accuracy": 0.08644400785854617,
+      "top3_coverage": 0.20235756385068762,
+      "log_loss": 2.5021031397358873,
+      "brier": 0.07428116165582344
+    }
+  },
+  "monthly": [
+    {
+      "month": "2017-01",
+      "model": "Form model",
+      "races": 85,
+      "top1_hits": 23,
+      "top1_accuracy": 0.27058823529411763,
+      "top3_coverage": 0.5294117647058824,
+      "log_loss": 2.213327026947232,
+      "brier": 0.06697066902852784
+    },
+    {
+      "month": "2017-01",
+      "model": "Closing market",
+      "races": 85,
+      "top1_hits": 31,
+      "top1_accuracy": 0.36470588235294116,
+      "top3_coverage": 0.6,
+      "log_loss": 1.9860105529183358,
+      "brier": 0.0628253899300319
+    },
+    {
+      "month": "2017-02",
+      "model": "Form model",
+      "races": 71,
+      "top1_hits": 20,
+      "top1_accuracy": 0.28169014084507044,
+      "top3_coverage": 0.5070422535211268,
+      "log_loss": 2.311132153181439,
+      "brier": 0.06980663821462048
+    },
+    {
+      "month": "2017-02",
+      "model": "Closing market",
+      "races": 71,
+      "top1_hits": 25,
+      "top1_accuracy": 0.352112676056338,
+      "top3_coverage": 0.5915492957746479,
+      "log_loss": 2.0252703477157943,
+      "brier": 0.0649324465104368
+    },
+    {
+      "month": "2017-03",
+      "model": "Form model",
+      "races": 80,
+      "top1_hits": 23,
+      "top1_accuracy": 0.2875,
+      "top3_coverage": 0.6,
+      "log_loss": 2.142995398420944,
+      "brier": 0.06761867026150913
+    },
+    {
+      "month": "2017-03",
+      "model": "Closing market",
+      "races": 80,
+      "top1_hits": 22,
+      "top1_accuracy": 0.275,
+      "top3_coverage": 0.6625,
+      "log_loss": 1.9585051015449728,
+      "brier": 0.06473493912081746
+    },
+    {
+      "month": "2017-04",
+      "model": "Form model",
+      "races": 82,
+      "top1_hits": 17,
+      "top1_accuracy": 0.2073170731707317,
+      "top3_coverage": 0.5975609756097561,
+      "log_loss": 2.175575162217508,
+      "brier": 0.06859542835762887
+    },
+    {
+      "month": "2017-04",
+      "model": "Closing market",
+      "races": 82,
+      "top1_hits": 22,
+      "top1_accuracy": 0.2682926829268293,
+      "top3_coverage": 0.6829268292682927,
+      "log_loss": 1.9450333226145253,
+      "brier": 0.0655767873901522
+    },
+    {
+      "month": "2017-05",
+      "model": "Form model",
+      "races": 80,
+      "top1_hits": 17,
+      "top1_accuracy": 0.2125,
+      "top3_coverage": 0.5625,
+      "log_loss": 2.1512978646154424,
+      "brier": 0.0713738257034694
+    },
+    {
+      "month": "2017-05",
+      "model": "Closing market",
+      "races": 80,
+      "top1_hits": 20,
+      "top1_accuracy": 0.25,
+      "top3_coverage": 0.65,
+      "log_loss": 1.9276837793943002,
+      "brier": 0.06721968345947797
+    },
+    {
+      "month": "2017-06",
+      "model": "Form model",
+      "races": 72,
+      "top1_hits": 20,
+      "top1_accuracy": 0.2777777777777778,
+      "top3_coverage": 0.5416666666666666,
+      "log_loss": 2.122520396265082,
+      "brier": 0.07161653612867426
+    },
+    {
+      "month": "2017-06",
+      "model": "Closing market",
+      "races": 72,
+      "top1_hits": 22,
+      "top1_accuracy": 0.3055555555555556,
+      "top3_coverage": 0.625,
+      "log_loss": 1.972148710775862,
+      "brier": 0.06892013018628822
+    },
+    {
+      "month": "2017-07",
+      "model": "Form model",
+      "races": 39,
+      "top1_hits": 8,
+      "top1_accuracy": 0.20512820512820512,
+      "top3_coverage": 0.46153846153846156,
+      "log_loss": 2.4069889842495025,
+      "brier": 0.07079685664638019
+    },
+    {
+      "month": "2017-07",
+      "model": "Closing market",
+      "races": 39,
+      "top1_hits": 6,
+      "top1_accuracy": 0.15384615384615385,
+      "top3_coverage": 0.5897435897435898,
+      "log_loss": 2.2677929429188874,
+      "brier": 0.06906394735427275
+    }
+  ],
+  "source_hashes": {
+    "race-result-horse.csv": "83d1d0125b2532057def92c2c1c1e4e7b40ac5ae31bbdea45acd7d89c52d21c8",
+    "race-result-race.csv": "f89ad229f94f2855a2181f76c259ab963b9503d642b6ba817f9fb372cc9e098c"
+  },
+  "caveats": [
+    "Historical replay only; no current entries or live odds are connected.",
+    "Current-race odds, finish times, running positions and results are excluded from model features.",
+    "Entity statistics are frozen before each race day; earlier test-day results can inform later days, never earlier predictions.",
+    "The model is frozen after July 2016; temperature is chosen only on September–December 2016.",
+    "Market probabilities normalize reciprocal historical win_odds within each race. Odds timestamp is unavailable.",
+    "Probability gap is a model–market disagreement, not expected profit or a calibrated return forecast.",
+    "Withdrawals/no-part/unknown starters are removed. Known non-finishers remain losses. First-place dead-heat races are excluded.",
+    "No dividends, fees or executable pre-bet odds: no bankroll, ROI or profit claims are calculated."
+  ]
+}
