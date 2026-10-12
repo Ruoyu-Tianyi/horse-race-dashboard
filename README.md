@@ -10,6 +10,8 @@ The app compares an independent historical-form model with recorded market price
 
 **Branch:** `design/hong-kong-neon`. The original design remains on `main`. The visual redesign preserves the three headline metrics, two supporting charts, race filters, model validation and team attribution required by the assignment. On narrow screens, the hero copy moves below the portrait; the interface uses no flashing animation. The artwork is bundled in the repository and needs no external image service or API key at runtime. See [artwork and design notes](assets/DESIGN.md) for provenance and the generation prompt.
 
+The red-and-gold theme extends across the full dashboard, including illuminated KPI panels, ranking ribbons, charts, tables, filters and action buttons. Heavy condensed **Teko** numerals are bundled locally with their open-font licence, with slanted and embossed styling for prominent values.
+
 ## Step 1 — Dataset and decision-maker
 
 **Dataset:** [Hong Kong Horse Racing Results 2014–17 Seasons, Lantana Camara, Kaggle](https://www.kaggle.com/datasets/lantanacamara/hong-kong-horse-racing).

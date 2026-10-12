@@ -8,7 +8,9 @@ import streamlit as st
 
 ROOT = Path(__file__).resolve().parent
 st.set_page_config(page_title='馬場風雲 · Team 11 | RACE EDGE', page_icon='🏇', layout='wide')
-st.markdown('<style>' + (ROOT / 'assets/style.css').read_text(encoding='utf-8') + '</style>', unsafe_allow_html=True)
+display_font = base64.b64encode((ROOT / 'assets/fonts/Teko.ttf').read_bytes()).decode('ascii')
+font_css = "@font-face{font-family:'Race Display';src:url(data:font/ttf;base64," + display_font + ") format('truetype');font-weight:300 700;font-display:swap;}"
+st.markdown('<style>' + font_css + (ROOT / 'assets/style.css').read_text(encoding='utf-8') + '</style>', unsafe_allow_html=True)
 
 
 @st.cache_data
@@ -28,13 +30,13 @@ def hero_art():
 def chart_theme(figure, height=360):
     figure.update_layout(
         height=height, margin=dict(l=0, r=24, t=12, b=20),
-        paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(75,0,13,0.5)',
         font=dict(family='Segoe UI, sans-serif', color='#ffe9b7', size=12),
         legend=dict(orientation='h', y=1.14, x=0, font=dict(size=11)),
         hoverlabel=dict(bgcolor='#4b0711', font_size=13),
     )
-    figure.update_xaxes(gridcolor='#663323', zeroline=False)
-    figure.update_yaxes(gridcolor='#663323', zeroline=False)
+    figure.update_xaxes(gridcolor='rgba(255,212,59,0.19)', zeroline=False, tickfont=dict(family='Race Display, sans-serif', size=21, color='#ffe672'))
+    figure.update_yaxes(gridcolor='rgba(255,212,59,0.13)', zeroline=False)
     return figure
 
 
@@ -44,9 +46,9 @@ def comparison_chart(field):
     figure = go.Figure()
     figure.add_trace(go.Bar(
         y=labels, x=ordered.model_probability * 100, name='模型胜率', orientation='h',
-        marker=dict(color='#ffd43b', cornerradius=4), width=.47,
+        marker=dict(color=['#ffd43b' if rank == 1 else '#ffad24' for rank in ordered.model_rank], line=dict(color='#fff1a0', width=1.2), cornerradius=0), width=.62,
         text=[f'{value:.1%}' for value in ordered.model_probability], textposition='outside',
-        textfont=dict(color='#fff1c5', size=11),
+        textfont=dict(family='Race Display, sans-serif', color='#fff1c5', size=21),
         hovertemplate='%{y}<br>模型胜率 %{x:.1f}%<extra></extra>',
     ))
     figure.add_trace(go.Scatter(
@@ -96,11 +98,14 @@ st.caption('数据：2014-09-14—2017-07-16，Kaggle 历史快照 · 生产刷�
 
 prediction_tab, validation_tab = st.tabs(['壹 /  赛前情报', '贰 /  历史检验'])
 with prediction_tab:
-    st.caption(f"本场模型首选：#{int(leader.horse_number):02d} {leader.horse_name}")
+    st.markdown(f'<div class="race-callout"><span class="callout-tag">本場焦點</span><span>模型首选 <b>#{int(leader.horse_number):02d} {escape(leader.horse_name)}</b></span><span class="callout-end">賽前情報局 / MODEL PICK</span></div>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
-    c1.metric('首选马匹 · 模型胜率', f'{leader.model_probability:.1%}', help='同场预测概率之和为 100%；这是模型估计，不是命中承诺。')
-    c2.metric('历史独赢赔率 · 参考', f'{leader.win_odds:.1f}', help='数据中的历史 win_odds；记录时点未知，不代表当时可成交报价。')
-    c3.metric('模型 − 市场概率', f'{leader.probability_gap * 100:+.1f} pp', help='模型胜率 − 归一化的 1/赔率。正值仅表示模型看法高于赔率基准，不等于预期盈利。')
+    with c1.container(key='kpi-win'):
+        st.metric('首选马匹 · 模型胜率', f'{leader.model_probability:.1%}', help='同场预测概率之和为 100%；这是模型估计，不是命中承诺。')
+    with c2.container(key='kpi-odds'):
+        st.metric('历史独赢赔率 · 参考', f'{leader.win_odds:.1f}', help='数据中的历史 win_odds；记录时点未知，不代表当时可成交报价。')
+    with c3.container(key='kpi-gap'):
+        st.metric('模型 − 市场概率', f'{leader.probability_gap * 100:+.1f} pp', help='模型胜率 − 归一化的 1/赔率。正值仅表示模型看法高于赔率基准，不等于预期盈利。')
     st.caption('市场概率 = (1 / 本马历史赔率) ÷ 同场所有马匹的 (1 / 历史赔率) 之和；pp 表示百分点。')
     left, right = st.columns([2.1, 1], gap='large')
     with left:
@@ -109,7 +114,7 @@ with prediction_tab:
     with right:
         st.markdown('<div class="section-head">金榜三甲<span>模型前三顺位</span></div>', unsafe_allow_html=True)
         for index, (_, runner) in enumerate(field.head(3).iterrows()):
-            st.markdown(f'''<div class="pick-card {'first' if index == 0 else ''}"><div class="pick-top"><div class="silk">{int(runner.horse_number):02d}</div><div class="pick-name">{escape(runner.horse_name)}</div><div class="pick-prob">{runner.model_probability:.1%}</div></div><div class="pick-bottom"><span>{escape(runner.jockey)}</span><span>赔率 {runner.win_odds:.1f} · 档位 {int(runner.draw)}</span></div></div>''', unsafe_allow_html=True)
+            st.markdown(f'''<div class="pick-card {'first' if index == 0 else ''}"><div class="pick-ribbon">第{['壹','貳','叁'][index]}順位 <span>MODEL RANK {index + 1:02d}</span></div><div class="pick-top"><div class="silk">{int(runner.horse_number):02d}</div><div class="pick-name">{escape(runner.horse_name)}</div><div class="pick-prob">{runner.model_probability:.1%}</div></div><div class="pick-bottom"><span>{escape(runner.jockey)}</span><span>赔率 <b>{runner.win_odds:.1f}</b> · 档位 <b>{int(runner.draw)}</b></span></div></div>''', unsafe_allow_html=True)
         st.markdown('<div class="micro">模型依据历史表现独立排序。金色柱为模型胜率，粉色菱形为赔率基准；差距是进一步研究的线索。</div>', unsafe_allow_html=True)
         if reveal:
             winner = field.loc[field.won.eq(1)].iloc[0]
@@ -125,7 +130,8 @@ with prediction_tab:
     display['model_probability'] *= 100
     display['market_probability'] *= 100
     display = display.rename(columns=labels)
-    st.dataframe(display, hide_index=True, width='stretch', height=325,
+    table_style = display.style.set_properties(**{'background-color':'#700b1a', 'color':'#fff1d0'}).set_properties(subset=['马号','模型胜率','历史赔率'], **{'color':'#ffdf4c', 'font-weight':'bold'})
+    st.dataframe(table_style, hide_index=True, width='stretch', height=325,
         column_config={
             '模型胜率': st.column_config.ProgressColumn(format='%.1f%%', min_value=0, max_value=100),
             '市场概率': st.column_config.NumberColumn(format='%.1f%%'),

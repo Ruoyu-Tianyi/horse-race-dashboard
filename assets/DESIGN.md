@@ -4,6 +4,8 @@ Branch: `design/hong-kong-neon`. Product title: **馬場風雲 / RACE EDGE**.
 
 The design uses a lacquer-red canvas, yellow-gold borders, traditional Chinese sign lettering, lantern-lit poster art, gilded runner numbers and a prominent three-runner shortlist. Chart marks retain different shapes: gold bars for model probabilities and pink diamonds for the market benchmark. The three KPIs and two analytical charts retain the original scope and methodology.
 
+The expanded page theme carries this treatment through the entire interface: a vivid vermilion patterned canvas, illuminated gold frames, embossed KPI numbers, rank ribbons, gold chart borders, red table cells, gold action buttons and framed detail panels. The display numerals use a locally bundled **Teko** variable font with a heavy condensed form, slanted treatment and layered shadows. Font source: [Google Fonts Teko](https://github.com/google/fonts/tree/main/ofl/teko); the required SIL Open Font License is included in `assets/fonts/OFL.txt`. The font is embedded in the app, so rendering does not depend on a user's installed fonts or an external font request.
+
 The full-width poster is decorative. Actual race date, course and field metadata are rendered as selectable HTML text over its dark left side. The artwork contains an invented adult woman with a racehorse; she is a decorative equestrian host, not a real jockey, endorsement or predictor. Narrow-screen CSS places text below the portrait. No blinking effects, autoplay, countdown, fabricated jackpot, invented live activity or winning guarantee is introduced.
 
 ## Artwork provenance
