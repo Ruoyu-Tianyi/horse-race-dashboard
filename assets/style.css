@@ -84,7 +84,8 @@ h1{font-size:2.4rem!important;font-weight:950!important;color:#fff0a5!important;
 .st-key-kpi-odds [data-testid="stMetric"]:after{content:'賠';}
 .st-key-kpi-gap [data-testid="stMetric"]:after{content:'差';}
 [data-testid="stMetricLabel"],[data-testid="stMetricLabel"] p{color:#fff1bf!important;font-size:14px!important;font-weight:800!important;letter-spacing:.035em;}
-[data-testid="stMetricValue"],[data-testid="stMetricValue"] *{font-family:'Race Display',Impact,sans-serif!important;font-weight:700!important;font-size:clamp(48px,5.8vw,84px)!important;line-height:1.15!important;font-variant-numeric:tabular-nums;color:#ffe875!important;letter-spacing:.005em;text-shadow:1px 1px 0 #a44903,2px 2px 0 #a44903,3px 3px 0 #a44903,4px 5px 0 #610014,0 0 20px #ffca4270;-webkit-text-stroke:.6px #fff2b0;}
+[data-testid="stMetric"]{container-type:inline-size;}
+[data-testid="stMetricValue"],[data-testid="stMetricValue"] *{font-family:'Race Display',Impact,sans-serif!important;font-weight:700!important;font-size:clamp(24px,24cqw,84px)!important;line-height:1.15!important;font-variant-numeric:tabular-nums;color:#ffe875!important;letter-spacing:.005em;white-space:nowrap!important;text-overflow:clip!important;overflow:visible!important;text-shadow:1px 1px 0 #a44903,2px 2px 0 #a44903,3px 3px 0 #a44903,4px 5px 0 #610014,0 0 20px #ffca4270;-webkit-text-stroke:.6px #fff2b0;}
 [data-testid="stMetricValue"]{transform:skew(-8deg);transform-origin:left center;padding-left:6px;overflow:visible!important;margin-top:10px;}
 [data-testid="stTabs"] [role="tablist"]{border-bottom:4px solid #ffdc55;gap:8px;padding-top:8px;}
 [data-testid="stTabs"] [role="tab"]{background:#76081e;border:2px solid #f6b638;border-bottom:0;font-size:19px;padding:13px 25px;border-radius:0;box-shadow:inset 0 0 0 3px #950421;color:#ffe9c0;}
@@ -115,7 +116,7 @@ h1{font-size:2.4rem!important;font-weight:950!important;color:#fff0a5!important;
 .validation-banner{background:linear-gradient(110deg,#8e1028,#690b20);border:3px double #ffcf60;border-left:8px solid #ffdc5f;color:#fff0d0;box-shadow:4px 5px 0 #510015;}
 .micro{color:#ffe2c2;}
 .footline{background:#68081bcc;border:3px double #f8bd42;padding:18px;color:#ffe2b4;letter-spacing:.04em;}
-@media(max-width:1150px) and (min-width:641px){[data-testid="stMetric"]{padding:22px 15px;min-height:156px}[data-testid="stMetricValue"],[data-testid="stMetricValue"] *{font-size:57px!important}.pick-top{flex-wrap:wrap}.pick-prob{margin-left:auto;font-size:41px}.pick-name{min-width:90px}.section-head{font-size:18px;padding:11px 9px}.section-head span{font-size:9px}.section-head:before{display:none}}
+@media(max-width:1150px) and (min-width:641px){[data-testid="stMetric"]{padding:22px 15px;min-height:156px}.pick-top{flex-wrap:wrap}.pick-prob{margin-left:auto;font-size:41px}.pick-name{min-width:90px}.section-head{font-size:18px;padding:11px 9px}.section-head span{font-size:9px}.section-head:before{display:none}}
 /* Poster-led prediction homepage, with race navigation built into the artwork. */
 .block-container{max-width:1640px;padding-top:1.2rem;}
 .race-hero.home-hero{container-type:inline-size;min-height:660px;height:min(82vh,780px);margin:4px 5px 0;}
