@@ -75,12 +75,12 @@ All three refer to the **model's top-ranked horse in the selected race**:
 
 The pre-implementation layout is saved in [assets/wireframe.svg](assets/wireframe.svg).
 
-1. **Top:** team title, one-line audience/decision caption, selected race context, data period/refresh line, then the three immediate headline values.
-2. **Middle:** a whole-field probability comparison alongside a three-runner shortlist. Both explain the headline candidate in the context of competitors.
+1. **Top:** enlarged poster with Team 11 attribution, selected race context and working links to the prediction and runner sections, then the three immediate headline values. At the user's request, the introduction and replay notice are removed from the opening; audience, historical coverage and refresh details remain in the bottom information panel.
+2. **Middle:** a three-runner shortlist arranged horizontally, followed by a full-width whole-field probability comparison. Both explain the headline candidate in the context of competitors.
 3. **Bottom:** runner records, scoped CSV export, prior form and an optional watchlist action. Details are for users who actually need to investigate.
 4. **Secondary tab:** independent model validation and a single trend chart. This keeps model assessment available without displacing race-by-race research.
 
-If an element does not help identify the field, compare estimates, assess evidence or inspect a runner, it is excluded.
+The original wireframe records the analytical structure before the visual redesign. This branch intentionally adds decorative poster and sign treatments for the requested prediction-homepage prototype, while keeping the analytical sections and metric limits.
 
 ## Step 4 — Refresh and action policy
 

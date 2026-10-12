@@ -2,6 +2,8 @@
 
 Branch: `design/hong-kong-neon`. Product title: **馬場風雲 / RACE EDGE**.
 
+The homepage now opens directly with an enlarged poster containing the team attribution, two section links and the selected race strip. The introductory text and replay notices were moved out of the opening at the user's request; data coverage and refresh assumptions remain in the bottom information panel. The sidebar slogan uses non-wrapping flex items and container-relative type sizing. Below the three KPIs, the shortlist is a horizontal three-card podium and the probability chart spans the main content width.
+
 The design uses a lacquer-red canvas, yellow-gold borders, traditional Chinese sign lettering, lantern-lit poster art, gilded runner numbers and a prominent three-runner shortlist. Chart marks retain different shapes: gold bars for model probabilities and pink diamonds for the market benchmark. The three KPIs and two analytical charts retain the original scope and methodology.
 
 The expanded page theme carries this treatment through the entire interface: a vivid vermilion patterned canvas, illuminated gold frames, embossed KPI numbers, rank ribbons, gold chart borders, red table cells, gold action buttons and framed detail panels. The display numerals use a locally bundled **Teko** variable font with a heavy condensed form, slanted treatment and layered shadows. Font source: [Google Fonts Teko](https://github.com/google/fonts/tree/main/ofl/teko); the required SIL Open Font License is included in `assets/fonts/OFL.txt`. The font is embedded in the app, so rendering does not depend on a user's installed fonts or an external font request.

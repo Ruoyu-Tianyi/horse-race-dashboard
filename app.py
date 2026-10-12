@@ -65,7 +65,7 @@ data, history, report = load_data()
 course_names = {'Sha Tin': '沙田 · SHA TIN', 'Happy Valley': '跑马地 · HAPPY VALLEY'}
 st.session_state.setdefault('watchlist', [])
 with st.sidebar:
-    st.markdown('<div class="side-emblem" aria-hidden="true">馬</div><div class="brand">馬場<span>風雲</span></div><div class="side-tag">RACE EDGE · HONG KONG EDITION</div><div class="side-couplet">鑼鼓響 · 睇好馬 · 論勝負</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-brand-block"><div class="side-emblem" aria-hidden="true">馬</div><div class="brand">馬場<span>風雲</span></div><div class="side-tag">RACE EDGE · HONG KONG EDITION</div><div class="side-couplet"><span>鑼鼓響</span><i>◆</i><span>睇好馬</span><i>◆</i><span>論勝負</span></div></div>', unsafe_allow_html=True)
     st.caption('赛事导航 / RACE SELECTOR')
     course = st.selectbox('赛场', list(course_names), format_func=lambda value: course_names[value])
     course_data = data.loc[data.race_course.eq(course)]
@@ -75,7 +75,6 @@ with st.sidebar:
     race_id = st.selectbox('场次', race_rows.race_id.tolist(), index=len(race_rows)-1,
         format_func=lambda value: f"R{int(race_rows.loc[race_rows.race_id.eq(value), 'race_number'].iloc[0]):02d}  ·  {int(race_rows.loc[race_rows.race_id.eq(value), 'race_distance'].iloc[0])}m")
     reveal = st.toggle('揭晓历史赛果', value=False)
-    st.markdown('<div class="side-note"><b>HISTORICAL REPLAY</b><br>原始数据：2014.09—2017.07<br>可回放预测：2017.01—2017.07<br><br>生产设想：赛后更新历史；<br>赛前赔率每 60 秒刷新。<br>当前 CSV 为固定快照。</div>', unsafe_allow_html=True)
     with st.expander(f"观察清单 · {len(st.session_state.watchlist)}"):
         if not st.session_state.watchlist:
             st.caption('在马匹详情中加入观察对象。')
@@ -88,13 +87,10 @@ with st.sidebar:
 field = data.loc[data.race_id.eq(race_id)].sort_values('model_rank').copy()
 race = field.iloc[0]
 leader = field.iloc[0]
-st.markdown('<div class="masthead"><span class="status"><i></i> 2017 歷史賽事回放</span><span class="edition">港式霓虹版 / HONG KONG NIGHTS</span></div>', unsafe_allow_html=True)
-st.title('Team 11 · 馬場風雲')
-st.caption('面向赛前投注研究者：比较马匹胜率与市场定价，筛选值得进一步研究的候选马匹。')
-st.markdown(f'''<div class="race-hero"><img class="hero-art" src="data:image/png;base64,{hero_art()}" alt="成年女骑师与赛马，红金港式霓虹海报插画"><div class="hero-shade"></div><div class="hero-content"><div class="race-kicker">RACE EDGE 呈獻 / {escape(race.race_course.upper())}</div><div class="hero-seal">賽馬<br>研究社</div>
-<div class="race-heading">馬場風雲<br><em>今場，睇真啲。</em></div><div class="hero-subtitle">一場好戲，一眼看清勝率與賠率。</div>
-<div class="race-meta"><span>第 {int(race.race_number):02d} 場</span><span>{int(race.race_distance):,} 米</span><span>{len(field)} 匹出賽</span><span>{escape(str(race.race_class))}</span></div><div class="hero-footnote">{date.strftime('%Y.%m.%d')} · {escape(str(race.surface).upper())} · {escape(str(race.track_condition))} · 歷史數據回放</div></div><div class="poster-stamp">香 港<br><b>賽 馬</b></div></div><div class="ticker-strip" aria-label="本页功能"><span>✦ 全場勝率</span><span>✦ 賠率對照</span><span>✦ 馬匹近況</span><span>✦ 歷史驗證</span></div>''', unsafe_allow_html=True)
-st.caption('数据：2014-09-14—2017-07-16，Kaggle 历史快照 · 生产刷新设想：赛后更新历史，赛前赔率每 60 秒刷新。')
+st.markdown(f'''<div class="race-hero home-hero"><img class="hero-art" src="data:image/png;base64,{hero_art()}" alt="成年女骑师与赛马，红金港式霓虹海报插画"><div class="hero-shade"></div><div class="hero-content"><div class="race-kicker">HONG KONG RACING / 賽馬預測殿堂</div>
+<h1 class="race-heading"><span class="hero-team">TEAM 11 呈獻</span>馬場風雲</h1><div class="hero-slogan">睇準形勢。<br><em>鎖定心水。</em></div><div class="hero-subtitle">全場勝率 · 獨贏賠率 · 心水排行</div>
+<div class="hero-actions"><a class="hero-cta" href="#race-picks" target="_self">即睇本場心水 <span>↗</span></a><a class="hero-link" href="#runner-board" target="_self">全場馬匹 ↓</a></div></div><div class="poster-stamp">香 港<br><b>賽 馬</b></div><div class="hero-race-strip"><div class="race-venue">{escape(course_names[course].split(' · ')[0])}<span>{escape(race.race_course.upper())}</span></div><div class="strip-race">R<b>{int(race.race_number):02d}</b></div><div class="strip-detail"><strong>{int(race.race_distance):,} 米 / {len(field)} 匹出賽</strong><span>{date.strftime('%Y.%m.%d')} · {escape(str(race.race_class))} · {escape(str(race.surface).upper())}</span></div><div class="strip-motto">一場風雲<br><b>盡在眼前</b></div></div></div><div class="ticker-strip" aria-label="本页功能"><span>✦ 獨贏情報</span><span>✦ 模型精選</span><span>✦ 賠率對照</span><span>✦ 馬匹戰績</span></div>''', unsafe_allow_html=True)
+st.markdown('<div id="race-picks" class="section-anchor"></div>', unsafe_allow_html=True)
 
 prediction_tab, validation_tab = st.tabs(['壹 /  赛前情报', '贰 /  历史检验'])
 with prediction_tab:
@@ -107,19 +103,18 @@ with prediction_tab:
     with c3.container(key='kpi-gap'):
         st.metric('模型 − 市场概率', f'{leader.probability_gap * 100:+.1f} pp', help='模型胜率 − 归一化的 1/赔率。正值仅表示模型看法高于赔率基准，不等于预期盈利。')
     st.caption('市场概率 = (1 / 本马历史赔率) ÷ 同场所有马匹的 (1 / 历史赔率) 之和；pp 表示百分点。')
-    left, right = st.columns([2.1, 1], gap='large')
-    with left:
-        st.markdown('<div class="section-head">胜率与市场定价<span>FULL FIELD / 全场对照</span></div>', unsafe_allow_html=True)
-        st.plotly_chart(comparison_chart(field), width='stretch', config={'displayModeBar': False})
-    with right:
-        st.markdown('<div class="section-head">金榜三甲<span>模型前三顺位</span></div>', unsafe_allow_html=True)
-        for index, (_, runner) in enumerate(field.head(3).iterrows()):
+    st.markdown('<div class="section-head">金榜三甲<span>模型前三顺位 / MODEL SHORTLIST</span></div>', unsafe_allow_html=True)
+    podium = st.columns(3, gap='medium')
+    for index, (_, runner) in enumerate(field.head(3).iterrows()):
+        with podium[index]:
             st.markdown(f'''<div class="pick-card {'first' if index == 0 else ''}"><div class="pick-ribbon">第{['壹','貳','叁'][index]}順位 <span>MODEL RANK {index + 1:02d}</span></div><div class="pick-top"><div class="silk">{int(runner.horse_number):02d}</div><div class="pick-name">{escape(runner.horse_name)}</div><div class="pick-prob">{runner.model_probability:.1%}</div></div><div class="pick-bottom"><span>{escape(runner.jockey)}</span><span>赔率 <b>{runner.win_odds:.1f}</b> · 档位 <b>{int(runner.draw)}</b></span></div></div>''', unsafe_allow_html=True)
-        st.markdown('<div class="micro">模型依据历史表现独立排序。金色柱为模型胜率，粉色菱形为赔率基准；差距是进一步研究的线索。</div>', unsafe_allow_html=True)
-        if reveal:
-            winner = field.loc[field.won.eq(1)].iloc[0]
-            st.success(f"历史冠军：#{int(winner.horse_number)} {winner.horse_name}")
-    st.markdown('<div class="section-head">参赛马匹<span>RUNNER INTELLIGENCE</span></div>', unsafe_allow_html=True)
+    if reveal:
+        winner = field.loc[field.won.eq(1)].iloc[0]
+        st.success(f"历史冠军：#{int(winner.horse_number)} {winner.horse_name}")
+    st.markdown('<div class="section-head">全場勝率對決<span>模型胜率 / 市场定价</span></div>', unsafe_allow_html=True)
+    st.plotly_chart(comparison_chart(field), width='stretch', config={'displayModeBar': False})
+    st.caption('金色柱为模型胜率，粉色菱形为赔率基准；差距是进一步研究的线索。')
+    st.markdown('<div id="runner-board" class="section-anchor"></div><div class="section-head">参赛马匹<span>RUNNER INTELLIGENCE</span></div>', unsafe_allow_html=True)
     labels = {'horse_number':'马号','horse_name':'马名','model_probability':'模型胜率','market_probability':'市场概率',
               'probability_gap':'概率差 pp','win_odds':'历史赔率','draw':'档位','jockey':'骑师','trainer':'练马师','finishing_position':'真实名次'}
     columns = ['horse_number','horse_name','model_probability','market_probability','probability_gap','win_odds','draw','jockey','trainer']
@@ -196,6 +191,8 @@ with validation_tab:
 - [Kaggle 原始数据集](https://www.kaggle.com/datasets/lantanacamara/hong-kong-horse-racing)''')
 
 with st.expander('数据来源与刷新计划'):
+    st.markdown('**适用用户与决策：** 面向赛前投注研究者，比较马匹胜率与市场定价，筛选值得进一步研究的候选马匹。')
+    st.markdown('**数据覆盖：** 2014-09-14—2017-07-16。可回放预测期为 2017-01—2017-07。')
     st.markdown('本应用使用用户提供的两份 Kaggle CSV，经 `race_id` 合并；原始记录为 30,189 条马匹记录和 2,367 场比赛。当前数据为固定历史快照，只有 2017 年独立检验期开放预测回放。')
     st.markdown('生产设想：官方赛果确认后更新历史；赛前赔率每 60 秒刷新，用户在挑选赛事时查看，并在决策前复核报价。赔率源超过 120 秒未更新时应暂停显示概率差。当前页面未接入实时赔率。')
     st.markdown('[原始数据集](https://www.kaggle.com/datasets/lantanacamara/hong-kong-horse-racing) · [项目仓库](https://github.com/Ruoyu-Tianyi/horse-race-dashboard)')

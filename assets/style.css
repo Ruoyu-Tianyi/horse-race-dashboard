@@ -15,7 +15,10 @@ h1{font-size:2.4rem!important;font-weight:950!important;color:#fff0a5!important;
 .brand{font-family:KaiTi,'Microsoft JhengHei',serif;text-align:center;font-size:40px;font-weight:900;letter-spacing:4px;color:#fff3b7;text-shadow:2px 3px 0 #61000a,0 0 16px #ffcb3366;}
 .brand span{color:#ffd43b;}
 .side-tag{text-align:center;font-size:9px;color:#ffdc89;letter-spacing:2px;margin:7px 0 18px;}
-.side-couplet{text-align:center;border-block:1px solid #c98339;padding:12px 0;margin-bottom:26px;font-family:KaiTi,serif;letter-spacing:3px;font-size:17px;color:#ffedb8;}
+.sidebar-brand-block{container-type:inline-size;min-width:0;width:100%;}
+.side-couplet{display:flex;align-items:center;justify-content:space-between;flex-wrap:nowrap;gap:clamp(2px,1.2cqw,5px);white-space:nowrap;text-align:center;border-block:1px solid #c98339;padding:12px 4px;margin-bottom:26px;font-family:KaiTi,serif;letter-spacing:.035em;font-size:clamp(9px,5.6cqw,16px);color:#ffedb8;}
+.side-couplet span{white-space:nowrap;flex:0 0 auto;}
+.side-couplet i{font-size:.46em;font-style:normal;flex:0 0 auto;}
 .side-note{border-top:1px solid #b26d37;margin-top:28px;padding-top:18px;font-size:12px;line-height:1.9;color:#edc5ae;}
 [data-testid="stSelectbox"] label{color:#ffe4b0;}
 .race-hero{isolation:isolate;position:relative;min-height:435px;border:3px solid #ffce45;outline:1px solid #9e4619;outline-offset:4px;border-radius:3px;overflow:hidden;margin:22px 5px 0;background:#650b18;box-shadow:0 0 32px #ff3c2133,inset 0 0 55px #2b0009;}
@@ -113,6 +116,40 @@ h1{font-size:2.4rem!important;font-weight:950!important;color:#fff0a5!important;
 .micro{color:#ffe2c2;}
 .footline{background:#68081bcc;border:3px double #f8bd42;padding:18px;color:#ffe2b4;letter-spacing:.04em;}
 @media(max-width:1150px) and (min-width:641px){[data-testid="stMetric"]{padding:22px 15px;min-height:156px}[data-testid="stMetricValue"],[data-testid="stMetricValue"] *{font-size:57px!important}.pick-top{flex-wrap:wrap}.pick-prob{margin-left:auto;font-size:41px}.pick-name{min-width:90px}.section-head{font-size:18px;padding:11px 9px}.section-head span{font-size:9px}.section-head:before{display:none}}
+/* Poster-led prediction homepage, with race navigation built into the artwork. */
+.block-container{max-width:1640px;padding-top:1.2rem;}
+.race-hero.home-hero{container-type:inline-size;min-height:660px;height:min(82vh,780px);margin:4px 5px 0;}
+.home-hero .hero-art{object-position:66% 35%;}
+.home-hero .hero-shade{background:linear-gradient(90deg,#40010cec 0%,#4f0411b3 30%,#48050e22 58%,transparent 78%),linear-gradient(0deg,#28000cdd,transparent 35%);}
+.home-hero .hero-content{padding:44px 4.5%;max-width:61%;}
+.home-hero .race-kicker{font-size:11px;letter-spacing:2.2px;color:#ffdc72;white-space:nowrap;}
+.home-hero h1.race-heading{font-family:KaiTi,STKaiti,'Noto Serif CJK TC','Microsoft JhengHei',serif!important;font-size:clamp(64px,9.6cqw,124px)!important;font-weight:900!important;letter-spacing:.035em!important;line-height:1.15!important;color:#ffe987!important;padding:0;margin:24px 0 22px!important;white-space:nowrap;text-shadow:2px 2px 0 #aa4300,4px 5px 0 #76000b,0 0 30px #ffbe4855;}
+.hero-team{display:block;font-family:'Race Display','Microsoft JhengHei',sans-serif;font-size:17px;font-weight:600;letter-spacing:3px;line-height:1.5;margin-bottom:9px;color:#ffd987;text-shadow:none;}
+.hero-slogan{font-family:KaiTi,'Microsoft JhengHei',serif;font-size:clamp(28px,4.2cqw,54px);font-weight:900;line-height:1.3;color:#fff0d1;letter-spacing:.055em;text-shadow:3px 4px #770015;}
+.hero-slogan em{font-style:normal;color:#ffdf57;}
+.home-hero .hero-subtitle{font-size:clamp(11px,1.5cqw,17px);letter-spacing:2px;margin:22px 0 27px;}
+.hero-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.hero-actions .hero-cta{display:inline-flex;align-items:center;gap:22px;background:linear-gradient(120deg,#fff3ae,#ffce34 70%,#e9920c);color:#760817!important;text-decoration:none;font-size:clamp(15px,1.9cqw,23px);font-weight:900;border:3px double #fff2aa;padding:13px 22px;box-shadow:5px 6px 0 #670114,0 0 27px #ffc64d66;transform:skew(-7deg);}
+.hero-cta span{font-size:1.3em;}
+.hero-actions .hero-cta:hover{background:#fff0a2;box-shadow:5px 6px 0 #670114,0 0 35px #ffdc7aa0;}
+.hero-actions .hero-link{font-size:13px;font-weight:800;color:#ffe6a1;text-decoration:none;border-bottom:1px solid #ffce5c;padding:8px 0;}
+.home-hero .poster-stamp{right:25px;bottom:133px;width:86px;height:86px;background:#a5142bce;}
+.hero-race-strip{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;gap:24px;min-height:100px;padding:15px 4.5%;border-top:3px double #ffd661;background:linear-gradient(100deg,#880219ee,#4a0013ed);box-shadow:0 -8px 30px #30000855;}
+.race-venue{font-family:KaiTi,serif;font-size:32px;line-height:1.15;font-weight:900;color:#ffdf72;white-space:nowrap;}
+.race-venue span{display:block;font-family:'Race Display',sans-serif;font-size:15px;font-weight:500;letter-spacing:1.5px;color:#eebc8c;margin-top:4px;}
+.strip-race{font-family:'Race Display',sans-serif;display:flex;align-items:baseline;gap:3px;font-size:22px;color:#ffd14a;border-left:1px solid #e6aa4a88;padding-left:22px;line-height:1;}
+.strip-race b{font-size:65px;font-weight:700;font-style:italic;text-shadow:3px 3px #9b3b00;}
+.strip-detail{display:flex;flex-direction:column;gap:8px;min-width:0;}
+.strip-detail strong{font-size:15px;color:#ffe8ab;}
+.strip-detail span{font-size:11px;color:#e9bc9e;}
+.strip-motto{margin-left:auto;font-family:KaiTi,serif;font-size:17px;font-weight:700;line-height:1.6;letter-spacing:3px;color:#ffe099;white-space:nowrap;}
+.strip-motto b{color:#fff0c9;}
+.section-anchor{height:0;scroll-margin-top:65px;}
+.pick-top{flex-wrap:wrap;}
+.pick-name{min-width:80px;}
+.pick-prob{margin-left:auto;}
+@media(max-width:1050px){.home-hero .hero-content{max-width:66%;padding-top:36px}.race-hero.home-hero{min-height:620px}.home-hero .hero-subtitle{letter-spacing:1px}.hero-race-strip{gap:16px}.strip-motto{display:none}.hero-actions{gap:15px}.hero-actions .hero-cta{padding:11px 15px;gap:15px}}
+@media(max-width:640px){.race-hero.home-hero{height:auto;min-height:720px}.home-hero .hero-art{object-position:83% top}.home-hero .hero-shade{background:linear-gradient(0deg,#4b0312ff 0%,#4b0312ec 36%,#4b031255 60%,transparent 85%)}.home-hero .hero-content{padding:270px 18px 132px;max-width:100%}.home-hero h1.race-heading{font-size:clamp(44px,14cqw,72px)!important;margin:10px 0 10px!important}.hero-team{font-size:12px;letter-spacing:2px;margin-bottom:3px}.home-hero .race-kicker{font-size:8px;letter-spacing:1px}.hero-slogan{font-size:27px}.hero-slogan br{display:none}.home-hero .hero-subtitle{margin:13px 0 17px;font-size:11px}.hero-actions{gap:15px}.hero-actions .hero-cta{font-size:15px;padding:10px 13px;gap:9px}.hero-actions .hero-link{font-size:11px}.home-hero .poster-stamp{top:17px;bottom:auto;right:16px;width:67px;height:67px}.hero-race-strip{padding:12px 14px;gap:12px;min-height:94px}.race-venue{font-size:23px}.race-venue span{font-size:11px;letter-spacing:.8px}.strip-race{padding-left:11px;font-size:16px}.strip-race b{font-size:48px}.strip-detail strong{font-size:11px}.strip-detail span{font-size:9px}.strip-detail{gap:5px}.pick-prob{font-size:44px!important}}
 @media(min-width:1500px){.race-heading{font-size:92px;}}
 @media(max-width:1000px){.hero-content{max-width:76%;padding:28px}.hero-seal{display:none}.race-heading{font-size:62px}.hero-subtitle{font-size:13px}.race-hero{min-height:400px}.section-head{font-size:17px}.pick-prob{font-size:23px}}
 @media(max-width:640px){.block-container{padding:1.2rem .85rem}h1{font-size:1.5rem!important}.edition{font-size:8px}.race-hero{min-height:540px}.hero-art{object-position:82% top}.hero-shade{background:linear-gradient(0deg,#48050eff 0%,#48050ed9 35%,transparent 80%)}.hero-content{max-width:100%;padding:280px 18px 22px}.race-heading{font-size:44px;margin:12px 0}.hero-subtitle{font-size:12px;letter-spacing:1px}.race-kicker{font-size:9px;letter-spacing:1px}.hero-footnote{font-size:9px}.poster-stamp{right:14px;top:15px;bottom:auto;width:62px;height:62px;font-size:11px}.ticker-strip{font-size:10px;letter-spacing:1px;gap:8px}.race-meta{gap:6px;font-size:10px}.race-meta span{padding:4px 7px}[data-testid="stMetricValue"]{font-size:2.3rem}[data-testid="stTabs"] [role="tab"]{font-size:14px;padding:10px 14px}.section-head{font-size:17px}.section-head span{font-size:9px}}
