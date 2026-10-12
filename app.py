@@ -1,12 +1,13 @@
 from pathlib import Path
 from html import escape
+import base64
 import json
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parent
-st.set_page_config(page_title='Team 11 · RACE EDGE | 赛马预测终端', page_icon='🏇', layout='wide')
+st.set_page_config(page_title='馬場風雲 · Team 11 | RACE EDGE', page_icon='🏇', layout='wide')
 st.markdown('<style>' + (ROOT / 'assets/style.css').read_text(encoding='utf-8') + '</style>', unsafe_allow_html=True)
 
 
@@ -18,16 +19,22 @@ def load_data():
     return predictions, history, report
 
 
+@st.cache_data
+def hero_art():
+    """Embed committed artwork so Cloud needs no external image service."""
+    return base64.b64encode((ROOT / 'assets/hong-kong-hero.png').read_bytes()).decode('ascii')
+
+
 def chart_theme(figure, height=360):
     figure.update_layout(
         height=height, margin=dict(l=0, r=24, t=12, b=20),
         paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
-        font=dict(family='Segoe UI, sans-serif', color='#b2c0a7', size=12),
+        font=dict(family='Segoe UI, sans-serif', color='#ffe9b7', size=12),
         legend=dict(orientation='h', y=1.14, x=0, font=dict(size=11)),
-        hoverlabel=dict(bgcolor='#202c1b', font_size=13),
+        hoverlabel=dict(bgcolor='#4b0711', font_size=13),
     )
-    figure.update_xaxes(gridcolor='#263021', zeroline=False)
-    figure.update_yaxes(gridcolor='#263021', zeroline=False)
+    figure.update_xaxes(gridcolor='#663323', zeroline=False)
+    figure.update_yaxes(gridcolor='#663323', zeroline=False)
     return figure
 
 
@@ -37,14 +44,14 @@ def comparison_chart(field):
     figure = go.Figure()
     figure.add_trace(go.Bar(
         y=labels, x=ordered.model_probability * 100, name='模型胜率', orientation='h',
-        marker=dict(color='#c5f568', cornerradius=4), width=.47,
+        marker=dict(color='#ffd43b', cornerradius=4), width=.47,
         text=[f'{value:.1%}' for value in ordered.model_probability], textposition='outside',
-        textfont=dict(color='#e6efdb', size=11),
+        textfont=dict(color='#fff1c5', size=11),
         hovertemplate='%{y}<br>模型胜率 %{x:.1f}%<extra></extra>',
     ))
     figure.add_trace(go.Scatter(
         y=labels, x=ordered.market_probability * 100, name='赔率归一化概率',
-        mode='markers', marker=dict(color='#e9ba68', size=9, symbol='diamond'),
+        mode='markers', marker=dict(color='#ff779d', size=10, symbol='diamond', line=dict(color='#fff0dc', width=1)),
         hovertemplate='%{y}<br>赔率归一化概率 %{x:.1f}%<extra></extra>',
     ))
     figure.update_layout(bargap=.25)
@@ -56,7 +63,7 @@ data, history, report = load_data()
 course_names = {'Sha Tin': '沙田 · SHA TIN', 'Happy Valley': '跑马地 · HAPPY VALLEY'}
 st.session_state.setdefault('watchlist', [])
 with st.sidebar:
-    st.markdown('<div class="brand"><i class="brand-mark"></i>RACE <span>EDGE</span></div><div class="side-tag">HONG KONG RACING INTELLIGENCE</div>', unsafe_allow_html=True)
+    st.markdown('<div class="side-emblem" aria-hidden="true">馬</div><div class="brand">馬場<span>風雲</span></div><div class="side-tag">RACE EDGE · HONG KONG EDITION</div><div class="side-couplet">鑼鼓響 · 睇好馬 · 論勝負</div>', unsafe_allow_html=True)
     st.caption('赛事导航 / RACE SELECTOR')
     course = st.selectbox('赛场', list(course_names), format_func=lambda value: course_names[value])
     course_data = data.loc[data.race_course.eq(course)]
@@ -79,15 +86,15 @@ with st.sidebar:
 field = data.loc[data.race_id.eq(race_id)].sort_values('model_rank').copy()
 race = field.iloc[0]
 leader = field.iloc[0]
-st.markdown('<span class="status"><i></i> HISTORICAL REPLAY · 2017</span>', unsafe_allow_html=True)
-st.title('Team 11 · RACE EDGE')
+st.markdown('<div class="masthead"><span class="status"><i></i> 2017 歷史賽事回放</span><span class="edition">港式霓虹版 / HONG KONG NIGHTS</span></div>', unsafe_allow_html=True)
+st.title('Team 11 · 馬場風雲')
 st.caption('面向赛前投注研究者：比较马匹胜率与市场定价，筛选值得进一步研究的候选马匹。')
-st.markdown(f'''<div class="race-hero"><div class="race-kicker">{escape(race.race_course.upper())} / {date.strftime('%d %b %Y').upper()} / RACE {int(race.race_number):02d}</div>
-<div class="race-heading">Read the form.<br><em>Find your edge.</em></div>
-<div class="race-meta"><span>{escape(str(race.race_class))}</span><span>{int(race.race_distance):,} METRES</span><span>{len(field)} STARTERS</span><span>{escape(str(race.surface).upper())}</span><span>{escape(str(race.track_condition))}</span></div></div>''', unsafe_allow_html=True)
+st.markdown(f'''<div class="race-hero"><img class="hero-art" src="data:image/png;base64,{hero_art()}" alt="成年女骑师与赛马，红金港式霓虹海报插画"><div class="hero-shade"></div><div class="hero-content"><div class="race-kicker">RACE EDGE 呈獻 / {escape(race.race_course.upper())}</div><div class="hero-seal">賽馬<br>研究社</div>
+<div class="race-heading">馬場風雲<br><em>今場，睇真啲。</em></div><div class="hero-subtitle">一場好戲，一眼看清勝率與賠率。</div>
+<div class="race-meta"><span>第 {int(race.race_number):02d} 場</span><span>{int(race.race_distance):,} 米</span><span>{len(field)} 匹出賽</span><span>{escape(str(race.race_class))}</span></div><div class="hero-footnote">{date.strftime('%Y.%m.%d')} · {escape(str(race.surface).upper())} · {escape(str(race.track_condition))} · 歷史數據回放</div></div><div class="poster-stamp">香 港<br><b>賽 馬</b></div></div><div class="ticker-strip" aria-label="本页功能"><span>✦ 全場勝率</span><span>✦ 賠率對照</span><span>✦ 馬匹近況</span><span>✦ 歷史驗證</span></div>''', unsafe_allow_html=True)
 st.caption('数据：2014-09-14—2017-07-16，Kaggle 历史快照 · 生产刷新设想：赛后更新历史，赛前赔率每 60 秒刷新。')
 
-prediction_tab, validation_tab = st.tabs(['01  赛前情报', '02  历史检验'])
+prediction_tab, validation_tab = st.tabs(['壹 /  赛前情报', '贰 /  历史检验'])
 with prediction_tab:
     st.caption(f"本场模型首选：#{int(leader.horse_number):02d} {leader.horse_name}")
     c1, c2, c3 = st.columns(3)
@@ -100,10 +107,10 @@ with prediction_tab:
         st.markdown('<div class="section-head">胜率与市场定价<span>FULL FIELD / 全场对照</span></div>', unsafe_allow_html=True)
         st.plotly_chart(comparison_chart(field), width='stretch', config={'displayModeBar': False})
     with right:
-        st.markdown('<div class="section-head">模型前三顺位<span>SHORTLIST</span></div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-head">金榜三甲<span>模型前三顺位</span></div>', unsafe_allow_html=True)
         for index, (_, runner) in enumerate(field.head(3).iterrows()):
             st.markdown(f'''<div class="pick-card {'first' if index == 0 else ''}"><div class="pick-top"><div class="silk">{int(runner.horse_number):02d}</div><div class="pick-name">{escape(runner.horse_name)}</div><div class="pick-prob">{runner.model_probability:.1%}</div></div><div class="pick-bottom"><span>{escape(runner.jockey)}</span><span>赔率 {runner.win_odds:.1f} · 档位 {int(runner.draw)}</span></div></div>''', unsafe_allow_html=True)
-        st.markdown('<div class="micro">模型依据历史表现独立排序。琥珀色标记显示赔率基准；两者的差距是进一步研究的线索。</div>', unsafe_allow_html=True)
+        st.markdown('<div class="micro">模型依据历史表现独立排序。金色柱为模型胜率，粉色菱形为赔率基准；差距是进一步研究的线索。</div>', unsafe_allow_html=True)
         if reveal:
             winner = field.loc[field.won.eq(1)].iloc[0]
             st.success(f"历史冠军：#{int(winner.horse_number)} {winner.horse_name}")
@@ -163,7 +170,7 @@ with validation_tab:
     })
     monthly = pd.DataFrame(report['monthly'])
     figure = go.Figure()
-    for label, color, name in [('Form model','#c5f568','历史表现模型'),('Closing market','#e9ba68','历史赔率基准')]:
+    for label, color, name in [('Form model','#ffd43b','历史表现模型'),('Closing market','#ff779d','历史赔率基准')]:
         group = monthly.loc[monthly.model.eq(label)]
         figure.add_trace(go.Scatter(x=group.month, y=group.top1_accuracy * 100, mode='lines+markers', name=name,
             line=dict(color=color,width=2.5), marker=dict(size=7),customdata=group[['races','top1_hits']],

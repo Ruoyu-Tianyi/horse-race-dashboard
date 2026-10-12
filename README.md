@@ -1,4 +1,4 @@
-# Team 11 · RACE EDGE
+# Team 11 · 馬場風雲 / RACE EDGE
 
 **Horse-racing predictions and odds comparison, designed as a historical research terminal.**
 
@@ -6,7 +6,9 @@ Team members: **Zhou Tianyi; Xu Yiming; Zhang Zai; Xu Mohan**.
 
 Repository: [Ruoyu-Tianyi/horse-race-dashboard](https://github.com/Ruoyu-Tianyi/horse-race-dashboard).
 
-The app compares an independent historical-form model with recorded market prices. Its visual language draws on racing and trading terminals: a dark field, lime probability bars, amber market markers, and a compact candidate shortlist. All predictions shown are out-of-time **historical replay**, not current betting advice or live prices.
+The app compares an independent historical-form model with recorded market prices. This **Hong Kong Neon** design branch uses traditional Chinese sign lettering, lacquer red, bright gold, neon glow, coin-shaped runner numbers and an illustrated adult equestrian host with a racehorse. Gold bars show model probabilities; pink diamonds show the historical market benchmark. All predictions shown are out-of-time **historical replay**, not current betting advice or live prices.
+
+**Branch:** `design/hong-kong-neon`. The original design remains on `main`. The visual redesign preserves the three headline metrics, two supporting charts, race filters, model validation and team attribution required by the assignment. On narrow screens, the hero copy moves below the portrait; the interface uses no flashing animation. The artwork is bundled in the repository and needs no external image service or API key at runtime. See [artwork and design notes](assets/DESIGN.md) for provenance and the generation prompt.
 
 ## Step 1 — Dataset and decision-maker
 
@@ -131,7 +133,7 @@ The notebook generator uses a project-local Jupyter kernel and saves executed ou
 **Streamlit Community Cloud deployment settings:**
 
 - Repository: `Ruoyu-Tianyi/horse-race-dashboard`
-- Branch: `main`
+- Branch: `design/hong-kong-neon` (use `main` for the original design)
 - Main file path: `app.py`
 - Advanced settings → Python version: **3.14**
 - Deploy from [Streamlit Community Cloud](https://share.streamlit.io/), following the [official deployment instructions](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy).
