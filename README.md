@@ -1,4 +1,19 @@
-# Team 11 · 馬場風雲 / RACE EDGE
+# Team 11 · RACE EDGE — Hong Kong Neon
+
+**English** | [简体中文](README.zh-CN.md)
+
+## About this branch
+
+The Hong Kong Neon edition of RACE EDGE reimagines the same historical racing analysis as a red-and-gold, poster-led prediction dashboard. Traditional sign lettering, an AI-generated adult equestrian portrait, condensed display numerals and a three-runner podium create a distinctive interface while preserving the model, market comparison and independent validation.
+
+**Branch:** `design/hong-kong-neon` · [Branch overview](ABOUT.md)
+
+| Edition | Branch | Focus |
+|---|---|---|
+| Classic | [`main`](https://github.com/Ruoyu-Tianyi/horse-race-dashboard/tree/main) | Compact, dark analytical interface |
+| Hong Kong Neon | [`design/hong-kong-neon`](https://github.com/Ruoyu-Tianyi/horse-race-dashboard/tree/design/hong-kong-neon) | Red-and-gold poster-led design |
+
+Both editions share the historical data and evaluation methodology. English is the default documentation language; the Chinese README covers the same course requirements and analytical limitations.
 
 **Horse-racing predictions and odds comparison, designed as a historical research terminal.**
 
@@ -68,7 +83,7 @@ All three refer to the **model's top-ranked horse in the selected race**:
 - August has no observations; partial first/last months and seasonal gaps must not be interpreted as zero performance. The notebook shows coverage gaps explicitly.
 - Popular horses are not equally likely to win. Historical market odds form a strong baseline and are compared with the model rather than hidden.
 - Outcomes in the selected race are hidden by default. Features use dates strictly before the race day, including trainer/jockey statistics. The result-reveal toggle and matching CSV export make hindsight visible.
-- The data ends in 2017. The title-area caption and sidebar identify historical replay and distinguish proposed refresh cadence from an actual live feed.
+- The data ends in 2017. Historical coverage and the proposed refresh cadence are documented in the bottom information panel; the selected race date remains visible in the hero.
 - Probabilities are estimates; no calibrated uncertainty interval is available. The screen does not turn probability gaps into a certainty rating or guaranteed-return claim.
 
 ### Sketch and hierarchy
@@ -145,3 +160,15 @@ The notebook generator uses a project-local Jupyter kernel and saves executed ou
 The assignment requires **everyone to submit individually** on Canvas, with their **own deployed app, repository and README**, even when the dataset and group discussion are shared. This repository belongs to its account owner; other members should create and adapt their own repositories and deployments.
 
 Submit the verified deployed application URL and your own GitHub repository URL. The local development URL is not a deployed submission URL.
+
+## Local workspace
+
+The owner's relocated Windows workspace is `C:\Users\ruoyu\ml4biz\Week6\data-app-dashboard-horse-race`. Run the commands above from that directory. Python training and artifact generation use project-relative paths.
+
+This repository contains the Streamlit course prototype. A native personal-website migration is a separate task; these instructions do not claim that a Vercel version has been deployed.
+
+## Team and acknowledgement
+
+**Team 11 — Zhou Tianyi / Xu Yiming / Zhang Zai / Xu Mohan**
+
+**We gratefully acknowledge Dang Yuhan for providing the inspiration for this project.**
