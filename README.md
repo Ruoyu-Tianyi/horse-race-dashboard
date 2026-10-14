@@ -1,5 +1,20 @@
 # Team 11 · RACE EDGE
 
+**English** | [简体中文](README.zh-CN.md)
+
+## About this branch
+
+The classic analytical edition of RACE EDGE: a Streamlit dashboard for Hong Kong horse-racing history, form-based win probabilities, market-odds comparisons and chronological model validation. Its dark interface uses lime probability bars and amber market markers to keep race-by-race research compact and readable.
+
+**Branch:** `main` · [Branch overview](ABOUT.md)
+
+| Edition | Branch | Focus |
+|---|---|---|
+| Classic | [`main`](https://github.com/Ruoyu-Tianyi/horse-race-dashboard/tree/main) | Compact, dark analytical interface |
+| Hong Kong Neon | [`design/hong-kong-neon`](https://github.com/Ruoyu-Tianyi/horse-race-dashboard/tree/design/hong-kong-neon) | Red-and-gold poster-led design |
+
+Both editions share the historical data and evaluation methodology. English is the default documentation language; the Chinese README covers the same course requirements and analytical limitations.
+
 **Horse-racing predictions and odds comparison, designed as a historical research terminal.**
 
 Team members: **Zhou Tianyi; Xu Yiming; Zhang Zai; Xu Mohan**.
@@ -141,3 +156,15 @@ The notebook generator uses a project-local Jupyter kernel and saves executed ou
 The assignment requires **everyone to submit individually** on Canvas, with their **own deployed app, repository and README**, even when the dataset and group discussion are shared. This repository belongs to its account owner; other members should create and adapt their own repositories and deployments.
 
 Submit the verified deployed application URL and your own GitHub repository URL. The local development URL is not a deployed submission URL.
+
+## Local workspace
+
+The owner's relocated Windows workspace is `C:\Users\ruoyu\ml4biz\Week6\data-app-dashboard-horse-race`. Run the commands above from that directory. Python training and artifact generation use project-relative paths.
+
+This repository contains the Streamlit course prototype. A native personal-website migration is a separate task; these instructions do not claim that a Vercel version has been deployed.
+
+## Team and acknowledgement
+
+**Team 11 — Zhou Tianyi / Xu Yiming / Zhang Zai / Xu Mohan**
+
+**We gratefully acknowledge Dang Yuhan for providing the inspiration for this project.**
