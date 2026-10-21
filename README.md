@@ -83,14 +83,14 @@ All three refer to the **model's top-ranked horse in the selected race**:
 - August has no observations; partial first/last months and seasonal gaps must not be interpreted as zero performance. The notebook shows coverage gaps explicitly.
 - Popular horses are not equally likely to win. Historical market odds form a strong baseline and are compared with the model rather than hidden.
 - Outcomes in the selected race are hidden by default. Features use dates strictly before the race day, including trainer/jockey statistics. The result-reveal toggle and matching CSV export make hindsight visible.
-- The data ends in 2017. Historical coverage and the proposed refresh cadence are documented in the bottom information panel; the selected race date remains visible in the hero.
+- The data ends in 2017. Historical coverage and the proposed refresh cadence are visible above the headline metrics and documented in the bottom information panel; the selected race date remains visible in the hero.
 - Probabilities are estimates; no calibrated uncertainty interval is available. The screen does not turn probability gaps into a certainty rating or guaranteed-return claim.
 
 ### Sketch and hierarchy
 
 The pre-implementation layout is saved in [assets/wireframe.svg](assets/wireframe.svg).
 
-1. **Top:** enlarged poster with Team 11 attribution, selected race context and working links to the prediction and runner sections, then the three immediate headline values. At the user's request, the introduction and replay notice are removed from the opening; audience, historical coverage and refresh details remain in the bottom information panel.
+1. **Top:** a compact Team 11 masthead, a one-line audience/decision caption, a visible data-period/production-refresh caption, selected race context and the three headline metrics. The existing red-and-gold poster follows the metrics, preserving the visual identity while putting the decision information first.
 2. **Middle:** a three-runner shortlist arranged horizontally, followed by a full-width whole-field probability comparison. Both explain the headline candidate in the context of competitors.
 3. **Bottom:** runner records, scoped CSV export, prior form and an optional watchlist action. Details are for users who actually need to investigate.
 4. **Secondary tab:** independent model validation and a single trend chart. This keeps model assessment available without displacing race-by-race research.
@@ -172,3 +172,7 @@ This repository contains the Streamlit course prototype. A native personal-websi
 **Team 11 — Zhou Tianyi / Xu Yiming / Zhang Zai / Xu Mohan**
 
 **We gratefully acknowledge Dang Yuhan for providing the inspiration for this project.**
+
+## Assignment 4 layout review
+
+Audience, decision, historical coverage and intended refresh frequency are visible without opening an expander. Exactly three `st.metric` values in `st.columns` precede the decorative poster. The original fonts, artwork, red-and-gold palette, two supporting charts and race filters are preserved. Headline metrics describe the selected race on both tabs; the validation tab keeps its explicitly labelled global scope.

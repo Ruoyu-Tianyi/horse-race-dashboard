@@ -157,3 +157,7 @@ notebook 生成器使用项目内 Jupyter 内核并保存执行输出。`uv.lock
 **We gratefully acknowledge Dang Yuhan for providing the inspiration for this project.**
 
 **诚挚感谢 Dang Yuhan 为本项目提供灵感。**
+
+## Assignment 4 展示顺序优化
+
+首屏依次展示 Team 11 简短标题、适用用户与决策说明、数据时段和生产刷新计划、当前赛事与三项关键指标。三项 `st.metric` 在 `st.columns` 中并排展示，原有红金海报移至指标之后。说明无需展开折叠区即可阅读；红金配色、字体、插画、两张支持图与赛事筛选器保留。两页顶部指标均对应当前所选赛事，历史检验页继续明确标注其全局统计范围。

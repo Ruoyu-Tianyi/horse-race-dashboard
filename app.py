@@ -88,6 +88,18 @@ with st.sidebar:
 field = data.loc[data.race_id.eq(race_id)].sort_values('model_rank').copy()
 race = field.iloc[0]
 leader = field.iloc[0]
+st.markdown('<div class="decision-masthead"><span>TEAM 11 · RACE EDGE</span><strong>馬場風雲</strong><small>HONG KONG NEON · 歷史研究看板</small></div>', unsafe_allow_html=True)
+st.caption('面向赛前研究者：比较马匹历史胜率与市场定价，决定哪些马匹值得进一步研究、哪些赛事应跳过。')
+st.caption('数据：2014-09-14—2017-07-16 · Kaggle 固定历史快照；生产刷新计划：官方赛果确认后更新历史，赛前赔率每 60 秒刷新。')
+st.markdown(f'<div class="decision-context">{escape(course_names[course])} · {date.strftime("%Y.%m.%d")} · R{int(race.race_number):02d} · {int(race.race_distance):,} 米 · {len(field)} 匹出赛 <span>模型首选 #{int(leader.horse_number):02d} {escape(leader.horse_name)}</span></div>', unsafe_allow_html=True)
+c1, c2, c3 = st.columns(3)
+with c1.container(key='kpi-win'):
+    st.metric('首选马匹 · 模型胜率', f'{leader.model_probability:.1%}', help='同场预测概率之和为 100%；这是模型估计，不是命中承诺。')
+with c2.container(key='kpi-odds'):
+    st.metric('历史独赢赔率 · 参考', f'{leader.win_odds:.1f}', help='数据中的历史 win_odds；记录时点未知，不代表当时可成交报价。')
+with c3.container(key='kpi-gap'):
+    st.metric('模型 − 市场概率', f'{leader.probability_gap * 100:+.1f} pp', help='模型胜率 − 归一化的 1/赔率。正值仅表示模型看法高于赔率基准，不等于预期盈利。')
+st.caption('市场概率 = (1 / 本马历史赔率) ÷ 同场所有马匹的 (1 / 历史赔率) 之和；pp 表示百分点。')
 st.markdown(f'''<div class="race-hero home-hero"><img class="hero-art" src="data:image/png;base64,{hero_art()}" alt="成年女骑师与赛马，红金港式霓虹海报插画"><div class="hero-shade"></div><div class="hero-content"><div class="race-kicker">HONG KONG RACING / 賽馬預測殿堂</div>
 <h1 class="race-heading"><span class="hero-team">TEAM 11 呈獻</span>馬場風雲</h1><div class="hero-slogan">睇準形勢。<br><em>鎖定心水。</em></div><div class="hero-subtitle">全場勝率 · 獨贏賠率 · 心水排行</div>
 <div class="hero-actions"><a class="hero-cta" href="#race-picks" target="_self">即睇本場心水 <span>↗</span></a><a class="hero-link" href="#runner-board" target="_self">全場馬匹 ↓</a></div></div><div class="poster-stamp">香 港<br><b>賽 馬</b></div><div class="hero-race-strip"><div class="race-venue">{escape(course_names[course].split(' · ')[0])}<span>{escape(race.race_course.upper())}</span></div><div class="strip-race">R<b>{int(race.race_number):02d}</b></div><div class="strip-detail"><strong>{int(race.race_distance):,} 米 / {len(field)} 匹出賽</strong><span>{date.strftime('%Y.%m.%d')} · {escape(str(race.race_class))} · {escape(str(race.surface).upper())}</span></div><div class="strip-motto">一場風雲<br><b>盡在眼前</b></div></div></div><div class="ticker-strip" aria-label="本页功能"><span>✦ 獨贏情報</span><span>✦ 模型精選</span><span>✦ 賠率對照</span><span>✦ 馬匹戰績</span></div>''', unsafe_allow_html=True)
@@ -96,14 +108,6 @@ st.markdown('<div id="race-picks" class="section-anchor"></div>', unsafe_allow_h
 prediction_tab, validation_tab = st.tabs(['壹 /  赛前情报', '贰 /  历史检验'])
 with prediction_tab:
     st.markdown(f'<div class="race-callout"><span class="callout-tag">本場焦點</span><span>模型首选 <b>#{int(leader.horse_number):02d} {escape(leader.horse_name)}</b></span><span class="callout-end">賽前情報局 / MODEL PICK</span></div>', unsafe_allow_html=True)
-    c1, c2, c3 = st.columns(3)
-    with c1.container(key='kpi-win'):
-        st.metric('首选马匹 · 模型胜率', f'{leader.model_probability:.1%}', help='同场预测概率之和为 100%；这是模型估计，不是命中承诺。')
-    with c2.container(key='kpi-odds'):
-        st.metric('历史独赢赔率 · 参考', f'{leader.win_odds:.1f}', help='数据中的历史 win_odds；记录时点未知，不代表当时可成交报价。')
-    with c3.container(key='kpi-gap'):
-        st.metric('模型 − 市场概率', f'{leader.probability_gap * 100:+.1f} pp', help='模型胜率 − 归一化的 1/赔率。正值仅表示模型看法高于赔率基准，不等于预期盈利。')
-    st.caption('市场概率 = (1 / 本马历史赔率) ÷ 同场所有马匹的 (1 / 历史赔率) 之和；pp 表示百分点。')
     st.markdown('<div class="section-head">金榜三甲<span>模型前三顺位 / MODEL SHORTLIST</span></div>', unsafe_allow_html=True)
     podium = st.columns(3, gap='medium')
     for index, (_, runner) in enumerate(field.head(3).iterrows()):
